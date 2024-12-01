@@ -1,0 +1,387 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref}
+\usepackage{chngcntr}
+\usepackage[perpage]{footmisc}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{subfigure}
+\renewcommand{\figurename}{Abbildung}
+\renewcommand{\thefootnote}{}
+
+\counterwithout{equation}{section}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+
+
+\title{Abgabe 1  für Computergestützte Methoden}
+\author{Gruppe 30
+\\Kristofer Tusevski Matrikel-Nr. 4349301
+\\Melih Gür Matrikel-Nr. 4361863
+\\Max Weber Matrikel-Nr. 4337927}
+\date{01.12.2024}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\tableofcontents % Inhaltsverzeichnis
+
+\newpage
+\section{Der zentrale Grenzwertsatz}
+
+Der zentrale Grenzwertsatz (ZGS) ist ein fundamentales Resultat der Wahrscheinlichkeitstheorie, das die Verteilung von Summen unabhängiger, identisch
+verteilter ($i.i.d.$) Zufallsvariablen (ZV) beschreibt. Er besagt, dass unter bestimmten Voraussetzungen die Summe einer großen Anzahl solcher ZV annähernd
+normalverteilt ist, unabhängig von der Verteilung der einzelnen ZV. Dies ist besonders nützlich, da die Normalverteilung gut untersucht und mathematisch 
+handhabbar ist.
+
+\subsection{Aussage}
+Sei $ X_1, X_2, . . . , X_n $ eine Folge von $i.i.d.$ ZV mit dem Erwartungswert $\mu = \mathbb{E}(X_i) $ und der Varianz  $\sigma^2 = Var(X_i)$, wobei $0 < \sigma^2 < \infty $ gelte. Dann konvergiert die standardisierte Summe $ Z_n $ dieser ZV für $ n \rightarrow \infty $ in Verteilung gegen eine Standardnormalverteilung:\hyperref[fn: LFZG ]{$^1$}
+
+\phantomsection
+\label{eq: Aussage 1 }
+\begin{equation}
+\[
+\ Z_n = \frac{\sum_{i=1}^nX_i-n\mu}{\sigma\sqrt{n}}\stackrel{\text{d}}{\rightarrow}N (0,1).$$
+\]
+\hfill\end{equation}
+
+\vspace{12pt}\noindent Das bedeutet, dass für große $n$ die Summe der ZV näherungsweise normalverteilt ist mit Erwartungswert $n\mu$ und Varianz $n\sigma^2$:
+
+\phantomsection
+\label{eq: Aussage 2 }
+\begin{equation}
+\[
+\ \sum_{i=1}^n X_i \sim N (n\mu,n\sigma^2).$$
+\]
+\hfill\end{equation}
+
+
+\subsection{Erklärung der Standardisierung}
+
+Um die Summe der ZV in eine Standardnormalverteilung zu transformieren, subtrahiert man den Erwartungswert $n\mu$ und teilt durch die Standard-\\abweichung $\sigma\sqrt{n}$. Dies führt zu der obigen Formel (\hyperref[eq: Aussage 1 ]{1}). Die Darstellung (\hyperref[eq: Aussage 2 ]{2}) ist für $n\rightarrow \infty$ nicht wohldefiniert.
+
+\subsection{Anwendung}
+
+Der ZGS wird in vielen Bereichen der Statistik und der Wahrscheinlichkeitstheorie angewendet. Typische Beispiele sind:
+
+\phantomsection\label{fn: LFZG }\footnotetext{$^1$Der Zentrale Grenzwertsatz hat verschiedene Verallgemeinerungen. Eine davon ist der \textbf{Lindeberg-Feller-Zentrale-Grenzwertsatz} \hypersetup{citecolor=blue, linkbordercolor=green}[\hyperref[eq:literatur]{1},Seite 328], der schwächere Bedingungen an die Unabhängigkeit und die identische Verteilung der ZV stellt.}
+
+\newpage
+
+\noindent{\large\textbf{Beispiel 1 : Qualitätskontrolle in einer Schokoladenfabrik}}
+\\ 
+
+\noindent\textbf{Problem :} 
+\\ Eine Schokoladenfabrik produziert täglich 10.000 Tafeln Schokolade. Jede Tafel sollte im Durchschnitt 100 Gramm wiegen, aber kleine Schwankungen treten auf. Der Produktionsleiter möchte sicherstellen, dass der Durchschnittsgewichtsfehler klein bleibt.
+\\ 
+
+\noindent\textbf{Vorgehen :} 
+\\
+
+\noindent\textbf{1. Daten sammeln :} 
+\begin{itemize}
+    \item der Produktionsleiter zieht täglich eine Stichprobe von 50 Tafeln aus der Produktion und misst ihr Gewicht
+\end{itemize}
+\\
+
+\noindent\textbf{2. Zentraler Grenzwertsatz anwenden :} 
+\begin{itemize}
+    \item die Gewichtswerte einzelner Tafeln können unterschiedlich sein und folgen möglicherweise keiner Normalverteilung
+    \item der zentrale Grenzwertsatz besagt, dass der Durchschnitt des Gewichts der 50 Tafeln (Stichprobenmittelwert) trotzdem näherungsweise normalverteilt ist, wenn die Stichprobengröße groß genug ist 
+    \\(in der Regel $n > 30$)
+\end{itemize}
+\\
+
+\noindent\textbf{3. Analyse :}
+\begin{itemize}
+    \item mit der Normalverteilung des Stichprobenmittelwertes kann der Produktionsleiter überprüfen, ob der Durchschnitt innerhalb eines akzeptablen Bereichs liegt (z.B. 100g $\pm$ 2g)
+    \item wenn Abweichungen auftreten, kann er Anpassungen an den Maschinen vornehmen
+\end{itemize}
+\\
+
+\noindent\textbf{Fazit :}
+\\ Dank des zentralen Grenzwertsatzes kann der Produktionsleiter mit Stichproben und statistischen Methoden effizient überprüfen, ob die Produktion im Sollbereich liegt, ohne jedes einzelne Produkt zu wiegen.
+
+\newpage
+\noindent{\large\textbf{Beispiel 2 : Wartezeiten in einem Callcenter}}
+\\
+
+\noindent\textbf{Problem :}
+\\ Ein Callcenter möchte die durchschnittliche Wartezeit seiner Kunden analysieren. Die Wartezeit einzelner Anrufer können stark variieren (einige warten nur wenige Sekunden, andere mehrere Minuten). Ziel ist es, den durchschnittlichen Wert zu bestimmen und sicherzustellen, dass er innerhalb akzeptabler Grenzen bleibt.
+\\
+
+\noindent\textbf{Vorgehen :} 
+\\
+
+\noindent\textbf{1. Daten sammeln :}
+\begin{itemize}
+    \item das Callcenter misst die Wartezeit jedes Kunden in einer zufälligen Stichprobe von 100 Anrufern pro Tag
+\end{itemize}
+\\
+
+\noindent\textbf{2. Zentraler Grenzwertsatz anwenden :}
+\begin{itemize}
+    \item die Wartezeit einzelner Kunden können einer unregelmäßigen Verteilung folgen (z.B. rechtsschief, weil einige Anrufer sehr lange warten, aber die meisten schnell verbunden werden)
+    \item der ZGS garantiert, dass der Durchschnitt der Wartezeiten dieser 100 Anrufer näherungsweise einer Normalverteilung folgt, unabhängig von der Verteilung der einzelnen Wartezeiten
+\end{itemize}
+\\
+
+\noindent\textbf{3. Analyse :}
+\begin{itemize}
+    \item mithilfe der approximativen Normalverteilung können die Manager des Callcenters :
+    \item den durchschnitt der Wartezeit schätzen
+    \item die Wahrscheinlichkeit berechnen, dass der Durchschnitt einen bestimmten Schwellenwert überschreitet (z.b. 2 Minuten)
+    \item mit Konfidenzintervallen die Unsicherheit der Schätzer quantifizieren
+\end{itemize}
+\\
+
+\noindent\textbf{Fazit :}
+\\ Dank des zentralen Grenzwertsatzes kann das Callcenter Vorhersagen über den durchschnittlichen Servicelevel und datenbasierte Entscheidungen treffen, z.B. ob zusätzliche Mitarbeiter erforderlich sind, um die Wartezeit zu reduzieren.
+
+
+
+
+
+
+
+
+\newpage
+\section{Bearbeitung zur Aufgabe 1}
+\\
+
+Im Folgenden möchten wir Ihnen unsere Lösungsansätze und Ergebnisse vorstellen. Wir beginnen mit einer kurzen Beschreibung der methodischen Herangehensweise an die Aufgabenstellung und gehen dann auf die spezifischen Anforderungen ein.
+
+\subsection{Datensatz}
+
+Im ersten Schritt der Bearbeitung haben wir uns intensiv mit dem bereitgestellten Datensatz auseinandergesetzt, um dessen Struktur und Inhalt zu verstehen. Es handelt sich hierbei um einen gruppenspezifischen Datensatz, der Informationen zu einem Fahrradverleih enthält.
+\\Die Daten umfassen verschiedene Variablen wie die Temperatur, die Luftfeuchtigkeit, die Windgeschwindigkeit sowie weitere meteorologische Messwerte. Besonders relevant für die Bearbeitung war die mittlere Temperatur in Grad Celsius, da diese im Rahmen der Aufgabenstellung für verschiedene Analysen herangezogen wurde.
+\\Ziel unserer Arbeit war es, die Daten systematisch aufzubereiten, die höchste mittlere Temperatur zu identifizieren und ein geeignetes Datenbankschema zu entwickeln, um die Informationen effizient zu speichern und abzurufen.
+
+\subsection{Tabellensortierung}
+
+Zunächst fügten wir die Rohdaten in eine Excel Tabelle ein um diese für unsere Berechnungen übersichtlich darzustellen. Demnach haben wir die Daten die für unsere Gruppe (30) Relevant waren herausgefiltert.
+
+\phantomsection
+\begin{figure}[H]
+    \centering
+        \label{fig: Tabelle sortiert }
+    \includegraphics[width=1\linewidth]{1_Tabelle Gefiltert nach unseren Daten.jpg}
+    \caption{Nach unseren Daten sortierte Tabelle}
+\end{figure}
+
+\subsection{Tabellenkalkulation}
+
+Um die Berechnung für die höchste mittlere Temperatur durchzuführen, haben wir die Daten der Spalte \textit{average temperature} verwendet. Diese haben wir der Größe nach absteigend sortieren lassen, sodass uns direkt der richtige Wert in Fahrenheit angegeben wird. Hierbei kam 83°F als Lösung heraus. Diesen Wert müssen wir jedoch noch in Grad Celsius umwandeln :
+\\
+
+\newpage
+\centering $T_{Celsius} = (T_{Fahrenheit}-32)\frac{5}{9}$
+\\
+
+\vspace{15pt}\centering Unser Ergebnis in Grad Celsius lautet somit \textbf{28,33}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{2_Tabelle Gefiltert uund sortiert.jpg}
+    \caption{Berechnung höchster mittleren Temperatur in Grad Fahrenheit}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\raggedright
+\subsection{Datenbank-Schema 1. und 2. Normalform}
+
+\vspace{15pt}
+\textbf{1. Normalform (Excel) = Trennung nicht-atomarer Attribute}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Screenshot 2024-11-30 025516.jpg}
+    \caption{1. Normalform in Excel}
+    \label{fig:enter-label}
+\end{figure}
+
+\textbf{1. Normalform (SQLite)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.40\linewidth]{1. Normalform SQLite.jpg}
+    \caption{1. Normalform def. Tabelle}
+    \label{fig:enter-label}
+\end{figure}
+
+\centering{\Huge\textbf{$\downarrow$}}
+
+\phantomsection
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{1.Normalform SQLite.jpg}
+    \label{fig: Tabelle zum Abfragen }
+    \caption{1. Normalform in SQLite}
+\end{figure}
+
+\raggedright\textbf{2. Normalform (Excel) = Auftrennung in mehrere Tabellen}
+
+\vspace{8pt}
+\centering\textbf{Tabelle Station}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{4_2.Normalform Tabelle Station.jpg}
+    \caption{2. Normalform Tabelle Station in Excel}
+    \label{fig:enter-label}
+\end{figure}
+
+\centering\textbf{Tabelle Wetter}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{5_2.Normalform Tabelle Wetter.jpg}
+    \caption{2. Normalform Tabelle Wetter in Excel}
+    \label{fig:enter-label}
+\end{figure}
+
+\centering\textbf{Tabelle Verleih}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{6_2.normalform Tabelle Verleih.jpg}
+    \caption{2. Normalform Tabelle Verleih in Excel}
+    \label{fig:enter-label}
+\end{figure}
+
+\newpage
+
+\raggedright\textbf{2. Normalform (SQLite)}
+
+\vspace{4pt}
+\centering\textbf{Tabelle Station}
+
+
+\begin{figure}[H]
+      \begin{minipage}{0.45\textwidth}
+      \includegraphics[width=\linewidth]{2. Normalform SQLite tabelle Station def.jpg}
+      \caption{2. Normalform def. Tabelle Station }
+      \end{minipage}\hfill
+      \begin{minipage}{0.45\textwidth}
+      \includegraphics[width= 1.5 \linewidth]{2. Normalform SQLite tabelle Station Anwendung.jpg}
+      \caption{2. Normalform ausf. Tabelle Station}  
+      \end{minipage}
+  \end{figure}  
+
+\centering{\Huge\textbf{$\downarrow$}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{2. Normalform SQLite tabelle Station .jpg}
+    \caption{2. Normalform Tabelle Station}
+    \label{fig:enter-label}
+\end{figure}
+
+\centering\textbf{Tabelle Wetter}
+
+\begin{figure}[H]
+      \begin{minipage}{0.45\textwidth}
+      \includegraphics[width=\linewidth]{2. Normalform SQLite tabelle Wetter def.jpg}
+      \caption{2. Normalform def. Tabelle Wetter }
+      \end{minipage}\hfill
+      \begin{minipage}{0.45\textwidth}
+      \includegraphics[width= 1.8 \linewidth]{2. Normalform SQLite tabelle Wetter anwendung.jpg}
+      \caption{2. Normalform ausf. Tabelle Wetter}  
+      \end{minipage}
+  \end{figure}  
+
+\centering{\Huge\textbf{$\downarrow$}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{2. Normalform SQLite tabelle Wetter .jpg}
+    \caption{2. Normalform Tabelle Wetter}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\centering\textbf{Tabelle Verleih}
+
+\begin{figure}[H]
+      \begin{minipage}{0.45\textwidth}
+      \includegraphics[width= 1.2 \linewidth]{2. Normalform SQLite tabelle Verleih def.jpg}
+      \caption{2. Normalform def. Tabelle Verleih }
+      \end{minipage}\hfill
+      \begin{minipage}{0.45\textwidth}
+      \includegraphics[width= 1.2 \linewidth]{2. Normalform SQLite tabelle Verleih anwendung.jpg}
+      \caption{2. Normalform ausf. Tabelle Verleih}  
+      \end{minipage}
+  \end{figure}  
+
+\centering{\Huge\textbf{$\downarrow$}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{2. Normalform SQLite tabelle Verleih .jpg}
+    \caption{2. Normalform Tabelle Verleih}
+    \label{fig:enter-label}
+\end{figure}
+
+\raggedright\subsection{DDL-Entwurf und SQLite-Implementierung}
+
+In dieser Aufgabe war es nicht nötig, einen eigenen DDL-Teil zu erstellen, da SQLite Online so eingestellt war, dass das System automatisch eine Tabelle erstellt hat, mit der wir weitergearbeitet haben. Jedoch haben wir uns trotzdem darüber Gedanken gemacht und listen folgend die Befehle auf, die man zum Erstellen einer Datenbank benötigt:
+\\ 
+
+\begin{itemize}
+    \item CREATE DATABASE : Datenbank erstellen
+    \item ALTER DATABASE : Datenbank modifizieren
+    \item CREATE TABLE : Tabelle erstellen
+    \item ALTER TABLE : Tabelle modifizieren
+    \item DROP TABLE : Tabelle löschen
+    \item CREATE INDEX : Index erzeugen
+    \item DROP INDEX : Index löschen
+\end{itemize}
+
+\subsection{Abfrage höchster mittlerer Temperatur (SQLite)}
+
+Damit wir die höchste mittlere Temperatur abfragen können, müssen wir zunächst unsere sortierte Excel Tabelle (siehe \hyperref[fig: Tabelle sortiert ]{Abb. 1}) als CSV Datei in SQLite importieren. Daraufhin erstellt SQLite eine Tabelle, wie in \hyperref[fig: Tabelle zum Abfragen ]{Abb. 5}, und wir können uns dann mit einem Befehl direkt die höchste mittlere Temperatur in Grad Celsius anzeigen lassen.
+
+\vspace{10pt}
+\centering\textbf{Befehl zum abfragen der höchsten mittleren Temperatur}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Befehl Abfrage.jpg}
+    \caption{Befehl Abfrage höchste mittlere Temperatur in Grad Celsius}
+    \label{fig:enter-label}
+\end{figure}
+
+\centering{\Huge\textbf{$\downarrow$}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Ergebniss Abfrage.jpg}
+    \caption{Ergebnis Abfrage höchste mittlere Temperatur in Grad Celsius}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+
+
+
+\newpage
+\phantomsection
+\raggedright{\Large\textbf{Literatur-und Quellenverzeichnis}}
+\vspace{10pt}
+
+\noindent\label{eq:literatur}[1] Achim Klenke.\textit{Wahrscheinlichkeitstheorie}. Springer, 3. edition, 2013.
+\vspace{10pt}
+
+Datensatz zur Bearbeitung aus dem Moodle-Lernraum
+\vspace{10pt}
+
+https://sqliteonline.com/
+\vspace{10pt}
+
+\href{https://github.com/Kristofer13/Latex-Abgabe/commit/}{GitHub-Repository}
+
+\end{document}
